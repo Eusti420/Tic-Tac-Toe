@@ -8,11 +8,11 @@ let fields = [
     null,
     null,
     null
-  ];
+];
 
-  function init() {
+function init() {
     render();
-  }
+}
   
   function render() {
     let contentDiv = document.getElementById('content');
@@ -23,7 +23,7 @@ let fields = [
         const index = i * 3 + j;
         let symbol = '';
         if (fields[index] === 'circle') {
-          symbol = 'O';
+          symbol = generateCircleSVG();
         } else if (fields[index] === 'cross') {
           symbol = 'X';
         }
@@ -34,10 +34,19 @@ let fields = [
   
     tableHTML += '</table>';
     contentDiv.innerHTML = tableHTML;
-  }
+}
   
-  // Call render function
+function generateCircleSVG() {
+    const color = '#00B0EF';
+    const width = 70;
+    const height = 70;
 
+    return `<svg width="${width}" height="${height}">
+              <circle cx="35" cy="35" r="30" stroke="${color}" stroke-width="5" fill="none">
+                <animate attributeName="stroke-dasharray" from="0 188.5" to="188.5 0" dur="0.2s" fill="freeze" />
+              </circle>
+            </svg>`;
+}
  
   
 

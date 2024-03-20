@@ -10,30 +10,42 @@ let fields = [
     null
 ];
 
+let currentPlayer = 'circle';
+
 function init() {
     render();
 }
-  
-  function render() {
-    let contentDiv = document.getElementById('content');
-    let tableHTML = '<table>';
+function render() {
+    const contentDiv = document.getElementById('content');
+    // Generate table HTML
+    let tableHtml = '<table>';
     for (let i = 0; i < 3; i++) {
-      tableHTML += '<tr>';
-      for (let j = 0; j < 3; j++) {
-        const index = i * 3 + j;
-        let symbol = '';
-        if (fields[index] === 'circle') {
-          symbol = generateCircleSVG();
-        } else if (fields[index] === 'cross') {
-          symbol = generateCrossSVG();
+        tableHtml += '<tr>';
+        for (let j = 0; j < 3; j++) {
+            const index = i * 3 + j;
+            let symbol = '';
+            if (fields[index] === 'circle') {
+                symbol = generateCircleSVG();
+            } else if (fields[index] === 'cross') {
+                symbol = generateCrossSVG();
+            }
+           
+            tableHtml += `<td onclick="handleClick(this, ${index})">${symbol}</td>`;
         }
-        tableHTML += `<td>${symbol}</td>`;
-      }
-      tableHTML += '</tr>';
+        tableHtml += '</tr>';
     }
-  
-    tableHTML += '</table>';
-    contentDiv.innerHTML = tableHTML;
+    tableHtml += '</table>';
+    // Set table HTML to contentDiv
+    contentDiv.innerHTML = tableHtml;
+}
+
+function handleClick(cell, index) {
+    if (fields[index] === null) {
+        fields[index] = currentPlayer;
+        cell.innerHTML = currentPlayer === 'circle' ? generateCircleSVG() : generateCrossSVG();
+        cell.onclick = null;
+        currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
+    }
 }
 
   

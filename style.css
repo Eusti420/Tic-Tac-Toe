@@ -13,6 +13,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 /* Set white border-color and thicker table borders */
 table {
@@ -47,4 +48,18 @@ table tr:last-child td {
 table tr td:last-child {
     border-right: 0;
 }
-  
+
+
+.restartButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+    font-weight: bold;
+    padding: 12px;
+}
+
+.restartButton:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}

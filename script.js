@@ -59,6 +59,7 @@ function handleClick(cell, index) {
       if (isGameFinished()) {
           const winCombination = getWinningCombination();
           drawWinningLine(winCombination);
+          document.getElementById('restartButton').style.display = 'block';
       }
   }
 }
@@ -87,6 +88,8 @@ function drawWinningLine(combination) {
   const startRect = startCell.getBoundingClientRect();
   const endRect = endCell.getBoundingClientRect();
 
+  contentRect = document.getElementById('content').getBoundingClientRect();
+
   const lineLength = Math.sqrt(
       Math.pow(endRect.left - startRect.left, 2) + Math.pow(endRect.top - startRect.top, 2)
   );
@@ -97,9 +100,10 @@ function drawWinningLine(combination) {
   line.style.width = `${lineLength}px`;
   line.style.height = `${lineWidth}px`;
   line.style.backgroundColor = lineColor;
-  line.style.top = `${ startRect.top + startRect.height / 2 - lineWidth / 2 } px`;
-  line.style.left = `${ startRect.left + startRect.width / 2 } px`;
+  line.style.top = `${ startRect.top + startRect.height / 2 - lineWidth / 2 - contentRect.top} px`;
+  line.style.left = `${ startRect.left + startRect.width / 2 - contentRect.left} px`;
   line.style.transform = `rotate(${ lineAngle }rad)`;
+ 
   document.getElementById('content').appendChild(line);
 }
 
@@ -140,6 +144,22 @@ function generateCrossSVG() {
     return svgHtml;
 }
  
-  
+
+function restartGame() {
+  fields = [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+  ];
+
+  render();
+  document.getElementById('restartButton').style.display = 'none';
+}
 
 
